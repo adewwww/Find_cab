@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../../University/7th Sem/Project/Code"
+		},
+		{
+			"path": "../../University/8th Sem/Project/Code"
+		},
+		{
+			"path": "../Movie Recommender"
+		},
+		{
+			"path": "../May 13"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "May 13"
+	}
+}
