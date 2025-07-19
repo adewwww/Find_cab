@@ -1,50 +1,35 @@
 import 'package:flutter/material.dart';
-import 'screens/ride_search_screen.dart';
+import 'package:provider/provider.dart';
+import 'theme_provider.dart';
+import 'pages/home_page.dart';
+import 'pages/results_page.dart';
+import 'pages/settings_page.dart';
 
 void main() {
-  runApp(const RideFareApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
-class RideFareApp extends StatelessWidget {
-  const RideFareApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
-      title: 'Ride Fare Aggregator',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Poppins',
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.black,
-          brightness: Brightness.light,
-        ),
-        scaffoldBackgroundColor: Colors.white,
-        useMaterial3: true,
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Colors.grey[100],
-          prefixIconColor: Colors.black,
-          labelStyle: const TextStyle(color: Colors.black54),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
-            textStyle: const TextStyle(fontSize: 16),
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            elevation: 2,
-          ),
-        ),
-      ),
-      home: const RideSearchScreen(),
+      title: 'Ride Fare App',
+      themeMode: themeProvider.themeMode,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      routes: {
+        '/': (context) => const HomePage(),
+        '/settings': (context) => const SettingsPage(),
+        '/results': (context) => const ResultsPage(),
+      },
     );
   }
 }
